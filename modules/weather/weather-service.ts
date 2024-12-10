@@ -1,10 +1,6 @@
 import { API_KEY, BASE_URL } from "./constants";
 import type { WeatherOptions, Weather } from "./types";
 
-// как понять кто делает запрос:
-// надо для CEO?
-// сервер может доолго не отдавать ничего из-за запроса
-
 class WeatherSevice {
   url: string;
   key: string;

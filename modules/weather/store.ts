@@ -1,57 +1,82 @@
 import { defineStore } from "pinia";
+import { format } from "date-fns";
+import { ru } from 'date-fns/locale/ru'
+
 import type {
   Degree_value,
   Pressure_value,
   Visibility_value,
   Weather,
+  WeatherCurrent,
+  WeatherLocation,
+  WeatherState,
 } from "./types";
 
-export const useWeatherStore = defineStore("weather", () => {
-  const weather = ref<Weather | null>(null);
-  const degreeValue = ref<Degree_value>("c");
-  const pressureValue = ref<Pressure_value>("mb");
-  const visibilityValue = ref<Visibility_value>("km");
-
-  const current = computed(() => weather.value?.current);
-  const location = computed(() => weather.value?.location);
-
-  const temperature = computed(() =>
-    current.value ? current.value[`temp_${degreeValue.value}`] : null
-  );
-
-  const feelslike = computed(() =>
-    current.value ? current.value[`feelslike_${degreeValue.value}`] : null
-  );
-
-  const pressure = computed(() =>
-    current.value ? current.value[`pressure_${pressureValue.value}`] : null
-  );
-  
-
-  const conditionText = computed(() =>
-    current.value ? current.value.condition.text : ""
-  );
-
-  const visibility = computed(() =>
-    current.value ? current.value[`vis_${visibilityValue.value}`] : null
-  );
-
-  function setWeather(data: Weather | null) {
-    weather.value = data;
-  }
-
-  return {
-    conditionText,
-    weather,
-    setWeather,
-    location,
-    current,
-    temperature,
-    feelslike,
-    pressure,
-    visibility,
-    degreeValue,
-    pressureValue,
-    visibilityValue,
-  };
+export const useWeatherStore = defineStore("weather", {
+  state: (): WeatherState => ({
+    weather: null,
+    degreeValue: "c",
+    pressureValue: "mb",
+    visibilityValue: "km",
+    speedValue: "kph",
+  }),
+  getters: {
+    current(state): WeatherCurrent | null {
+      return state.weather?.current || null;
+    },
+    location(state): WeatherLocation | null {
+      return state.weather?.location || null;
+    },
+    temperature(state): number | undefined {
+      return this.current?.[`temp_${state.degreeValue}`];
+    },
+    feelslike(state): number | undefined {
+      return this.current?.[`feelslike_${state.degreeValue}`];
+    },
+    wind(state): number | undefined {
+      return this.current?.[`wind_${state.speedValue}`];
+    },
+    windValueUser(state): string {
+      return state.speedValue.startsWith("k") ? "км/ч" : "миль/ч";
+    },
+    pressure(state): number | null {
+      return this.current?.[`pressure_${state.pressureValue}`] || null;
+    },
+    conditionText(): string {
+      return this.current?.condition.text || "";
+    },
+    visibility(state): number | null {
+      return this.current?.[`vis_${state.visibilityValue}`] || null;
+    },
+    locationPlace(): string | undefined {
+      return this.location?.name;
+    },
+    locationDateTime(): string {
+      return this.location?.localtime_epoch
+        ? `${format(
+            new Date(this.location.localtime_epoch * 1000),
+            `d MMMM, EEEE`, {
+              locale: ru
+            }
+          )}`
+        : "";
+    },
+    conditionIcon(): string | null {
+      return this.current?.condition.icon || null;
+    },
+  },
+  actions: {
+    setWeather(v: Weather | null) {
+      this.weather = v;
+    },
+    setDegreeValue(v: Degree_value) {
+      this.degreeValue = v;
+    },
+    setPressureValue(v: Pressure_value) {
+      this.pressureValue = v;
+    },
+    setVisibilityValue(v: Visibility_value) {
+      this.visibilityValue = v;
+    },
+  },
 });

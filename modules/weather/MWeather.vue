@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import CLocation from "./components/CLocation.vue";
-import CWeather from "./components/CWeather.vue";
+import CWeatherCondition from "./components/CWeatherCondition.vue";
+import CWeatherTop from "./components/CWeatherTop.vue";
 import { useWeatherStore } from "./store";
 import { weatherService } from "./weather-service";
 
@@ -17,7 +17,6 @@ async function getWeatherHandler() {
       lang: "ru",
     });
     setWeather(data.value);
-    console.log(data.value);
   } catch (error) {
     console.log(error);
   }
@@ -27,10 +26,20 @@ getWeatherHandler();
 </script>
 
 <template>
-  <div class="p-1">
-    <CLocation />
-    <CWeather />
+  <div class="p-1 m-weather">
+    <CWeatherTop />
+    <CWeatherCondition class="my-2" />
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.m-weather {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+</style>

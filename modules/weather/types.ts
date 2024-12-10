@@ -66,4 +66,12 @@ export type Lang = "ru" | "";
 export type Degree_value = "c" | "f";
 export type Pressure_value = "in" | "mb";
 export type Visibility_value = "km" | "miles";
+export type Speed_value = "kph" | "mph";
 
+export type WeatherState = {
+  weather: Weather | null
+  degreeValue: Degree_value
+  pressureValue: Pressure_value
+  visibilityValue: Visibility_value
+  speedValue: Speed_value
+}
