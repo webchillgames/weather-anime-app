@@ -3,15 +3,31 @@ import CWeatherCondition from "./components/CWeatherCondition.vue";
 import CWeatherTop from "./components/CWeatherTop.vue";
 import { useWeatherStore } from "./store";
 import { weatherService } from "./weather-service";
+import { useRoute } from "vue-router";
+import { geolocationService } from "./geolocation-service";
 
 const { setWeather } = useWeatherStore();
+const route = useRoute();
+
+geolocationService.getUserPosition();
+
+watch(
+  () => route.query,
+  (v) => {
+    if (!route.query.coords) {
+      geolocationService.getUserPosition();
+    }
+    getWeatherHandler();
+  },
+  { immediate: true }
+);
 
 async function getWeatherHandler() {
   try {
     const { data } = await weatherService.getWeather({
       coords: {
-        lat: 47.952132,
-        lon: -124.384397,
+        lat: Number(route.query.lat),
+        lon: Number(route.query.lon),
       },
 
       lang: "ru",
@@ -21,8 +37,6 @@ async function getWeatherHandler() {
     console.log(error);
   }
 }
-
-getWeatherHandler();
 </script>
 
 <template>

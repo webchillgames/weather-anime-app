@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import MLocation from '~/modules/location/MLocation.vue';
+import MLocation from '~/modules/weather/components/CLocation.vue';
 
 </script>
 

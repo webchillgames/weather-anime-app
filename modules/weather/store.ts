@@ -19,6 +19,7 @@ export const useWeatherStore = defineStore("weather", {
     pressureValue: "mb",
     visibilityValue: "km",
     speedValue: "kph",
+    coords: null,
   }),
   getters: {
     current(state): WeatherCurrent | null {

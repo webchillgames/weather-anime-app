@@ -1,6 +1,6 @@
 export type Coords = {
-  lat: number;
-  lon: number;
+  lat: number | null;
+  lon: number | null;
 };
 
 export type WeatherOptions = {
@@ -69,9 +69,10 @@ export type Visibility_value = "km" | "miles";
 export type Speed_value = "kph" | "mph";
 
 export type WeatherState = {
-  weather: Weather | null
-  degreeValue: Degree_value
-  pressureValue: Pressure_value
-  visibilityValue: Visibility_value
-  speedValue: Speed_value
-}
+  weather: Weather | null;
+  degreeValue: Degree_value;
+  pressureValue: Pressure_value;
+  visibilityValue: Visibility_value;
+  speedValue: Speed_value;
+  coords: Coords | null;
+};

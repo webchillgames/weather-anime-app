@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     "~/assets/styles/main.scss",
     "@fortawesome/fontawesome-svg-core/styles.css",
   ],
+  build: {
+    transpile: ['@fortawesome/vue-fontawesome']
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
