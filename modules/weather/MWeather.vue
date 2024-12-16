@@ -27,7 +27,7 @@ async function getWeatherHandler() {
     const { data } = await weatherService.getWeather({
       coords: {
         lat: Number(route.query.lat),
-        lon: Number(route.query.lon),
+        lng: Number(route.query.lon),
       },
 
       lang: "ru",

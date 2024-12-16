@@ -1,6 +1,6 @@
 export type Coords = {
   lat: number | null;
-  lon: number | null;
+  lng: number | null;
 };
 
 export type WeatherOptions = {
@@ -13,7 +13,7 @@ export type WeatherLocation = {
   region: string;
   country: string;
   lat: number;
-  lon: number;
+  lng: number;
   tz_id: string;
   localtime_epoch: number;
   localtime: string;

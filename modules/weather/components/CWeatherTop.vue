@@ -29,7 +29,7 @@ const {
     </div>
     <div class="justify-self-end">
       <NuxtLink
-        to="/location"
+        :to="{path: '/location', query: $route.query}"
         class="flex items-center hover:text-orange-500 active:text-orange-700"
       >
         <span class="mr-1">{{ locationPlace }}</span>

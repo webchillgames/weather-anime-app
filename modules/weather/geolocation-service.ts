@@ -10,7 +10,7 @@ class Geolocation {
     navigateTo({
       query: {
         lat: position.coords.latitude,
-        lon: position.coords.longitude,
+        lng: position.coords.longitude,
       },
     });
   }

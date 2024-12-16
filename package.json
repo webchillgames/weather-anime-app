@@ -17,6 +17,7 @@
     "@nuxt/types": "^2.18.1",
     "@pinia/nuxt": "^0.9.0",
     "date-fns": "^4.1.0",
+    "leaflet": "^1.9.4",
     "nuxt": "^3.14.1592",
     "pinia": "^2.3.0",
     "vue": "latest",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@nuxtjs/date-fns": "^1.5.0",
+    "@types/leaflet": "^1.9.15",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "sass-embedded": "^1.82.0",

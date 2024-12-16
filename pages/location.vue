@@ -1,14 +1,12 @@
-<script lang='ts' setup>
-import MLocation from '~/modules/weather/components/CLocation.vue';
+<script lang="ts" setup>
+import MMap from "~/modules/map/MMap.vue";
 
 </script>
 
-
 <template>
   <div>
-   <MLocation />
+    <ClientOnly><MMap /></ClientOnly>
   </div>
 </template>
-
 
 <style lang="scss"></style>
